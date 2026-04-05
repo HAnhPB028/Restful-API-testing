@@ -1,0 +1,15 @@
+Test Case Description,Test Objective,data,title,desc,name,fileName,filePath,status,status_desc
+Upload file,Verify upload scucesssful PDF file, pdf file,Book18_03_5,dec pdf,ch6.pdf,ch6.pdf,D:\day6\Ch6.pdf,OK,
+Upload file,Verify can not  upload PNG file ,png file,png,Description png,Meo.png,Meo.png,D:\day6\Meo.png,InvalidFileFormat,File is not pdf or MS Office type
+Upload file,Verify can not upload MP4  file ,mp4 file,video1,Description mp4,Buoi.mp4,Buoi.mp4,D:\day6\Buoi4.mp4,InvalidFileFormat,File is not pdf or MS Office type
+Upload file,Verify upload successful DOCX file,docx file,Doc_title,desc doc,Lab5-StdReport.docx,Lab5-StdReport.docx,D:\day6\Lab5-StdReport.docx,OK,
+Upload file,Verify upload successful XLSX file,xlsx file,Sheet_title,desc xlsx,K24.xlsx,K24.xlsx,D:\day6\K24.xlsx,OK,
+Upload file,Verify upload file with space in filename,space file,my file,desc space,my file.pdf,my file.pdf,D:\day6\my file.pdf,OK,
+Upload file,Verify upload duplicate file,duplicate file,ch6.pdf,desc duplicate,ch6.pdf,ch6.pdf,D:\day6\Ch6.pdf,DuplicateFile,File already exists
+Upload file,Verify missing file path,missing file,no file,desc missing,,,MissingFile,File is required,
+Upload file,Verify upload successful PDF file (another file),pdf file,Lab4,desc pdf Lab4,Lab4.pdf,Lab4.pdf,D:\day6\Lab4.pdf,OK,
+Upload file,Verify upload DOCX file with different title,docx file,Doc_test,desc doc test,RequirementsSpecTemplate.docx,RequirementsSpecTemplate.docx,D:\day6\RequirementsSpecTemplate.docx,OK,
+Upload file,Verify can not upload TXT file,txt file,text file,desc txt,Diagrams.txt,Diagrams.txt,D:\day6\Diagrams.txt,InvalidFileFormat,File is not allowed
+Upload file,Verify upload PDF with short name,pdf file,a,desc short,a.pdf,a.pdf,D:\day6\a.pdf,OK,
+Upload file,Verify can not upload JPG file,jpg file,image file,desc jpg,image.jpg,image.jpg,D:\day6\image.jpg,InvalidFileFormat,File is not allowed
+Upload file,Verify can not upload GIF file,gif file,gif file,desc gif,image.gif,image.gif,D:\day6\image.gif,InvalidFileFormat,File is not allowed

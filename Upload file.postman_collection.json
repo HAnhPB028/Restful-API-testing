@@ -1,0 +1,682 @@
+{
+  "info": {
+    "_postman_id": "c46de095-a300-4c28-aa0b-a63729ce8757",
+    "name": "Day 06 -upload file",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "47822866",
+    "_collection_link": "https://go.postman.co/collection/47822866-c46de095-a300-4c28-aa0b-a63729ce8757?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Login Hogo",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let dataResponse  = pm.response.json()\r",
+              "pm.environment.set(\"tokenHogo\", dataResponse.token)\r",
+              "\r",
+              "console.log(\"post-request\")"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "console.log(\"pre-request\")"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://www.hogodoc.com/HoGo/api/v1/Login ?EmailAddress=honganhnt1005@gmail.com&Password=dda85dda88539bd80faba4961389b782",
+          "protocol": "https",
+          "host": [
+            "www",
+            "hogodoc",
+            "com"
+          ],
+          "path": [
+            "HoGo",
+            "api",
+            "v1",
+            "Login "
+          ],
+          "query": [
+            {
+              "key": "EmailAddress",
+              "value": "honganhnt1005@gmail.com"
+            },
+            {
+              "key": "Password",
+              "value": "dda85dda88539bd80faba4961389b782"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "UploadDocumentMultipart",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let dataResponse = pm.response.json()\r",
+              "if(pm.iterationData.get(\"status\")==\"OK\")\r",
+              "{\r",
+              "    pm.environment.set(\"queueId\", dataResponse.queue_id)\r",
+              "    pm.test(\"Status code is 200\", function () {\r",
+              "        pm.response.to.have.status(200);\r",
+              "    });\r",
+              "}\r",
+              "else\r",
+              "{\r",
+              "    pm.test(pm.iterationData.get(\"Test Objective\") + \" - status: \" + pm.iterationData.get(\"status\") , function () {\r",
+              "        pm.expect(dataResponse.status).to.eql(pm.iterationData.get(\"status\"))\r",
+              "    });\r",
+              "\r",
+              "     pm.test(\"verify status description - \" +  pm.iterationData.get(\"status_desc\"), function () {\r",
+              "        pm.expect(dataResponse.status_desc).to.eql(pm.iterationData.get(\"status_desc\"))\r",
+              "    });\r",
+              "}\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Accept-Language",
+            "value": "en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7"
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive"
+          },
+          {
+            "key": "Origin",
+            "value": "https://www.hogodoc.com"
+          },
+          {
+            "key": "Referer",
+            "value": "https://www.hogodoc.com/HoGo/SendWizard"
+          },
+          {
+            "key": "Sec-Fetch-Dest",
+            "value": "empty"
+          },
+          {
+            "key": "Sec-Fetch-Mode",
+            "value": "cors"
+          },
+          {
+            "key": "Sec-Fetch-Site",
+            "value": "same-origin"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Google Chrome\";v=\"146\""
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"Windows\""
+          },
+          {
+            "key": "Cookie",
+            "value": "SpryMedia_DataTables_tablepaging_mydocumentlist=%7B%22iCreate%22%3A1774680334395%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B4%2C%22desc%22%2C1%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; SpryMedia_DataTables_tablepaging_history=%7B%22iCreate%22%3A1774680411027%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B0%2C%22asc%22%2C0%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; JSESSIONID=509150927D85639F3A88604CBDE4F4E2; isRefresh=true; l_p=mydocumentlist.html; _ga_WTB0VKWJKM=GS2.1.s1774086181$o23$g0$t1774086181$j60$l0$h0; _ga=GA1.2.542996358.1704605418; _ga_21X02YQCNR=GS2.2.s1774086182$o24$g0$t1774086182$j60$l0$h0; _ga_QJNG5NHYGT=GS2.2.s1774086182$o23$g0$t1774086182$j60$l0$h0; G_ENABLED_IDPS=google; exp_last_visit=1774086184; AWSELB=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; AWSELBCORS=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; exp_last_activity=1774680098; exp_tracker=a%3A1%3A%7Bi%3A0%3Bs%3A5%3A%22index%22%3B%7D; hogo_lang=en; _gid=GA1.2.698432248.1774680109; i18next=en; _sessionToken=d69e8a7e293140f392dd423cb038d184"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "{{name}}",
+              "type": "text"
+            },
+            {
+              "key": "SessionID",
+              "value": "{{tokenHogo}}",
+              "type": "text"
+            },
+            {
+              "key": "file_name",
+              "value": "{{fileName}}",
+              "type": "text"
+            },
+            {
+              "key": "file",
+              "type": "file",
+              "src": "{{filePath}}"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://www.hogodoc.com/HoGo/api/v1/UploadDocumentMultipart?SessionID={{tokenHogo}}",
+          "protocol": "https",
+          "host": [
+            "www",
+            "hogodoc",
+            "com"
+          ],
+          "path": [
+            "HoGo",
+            "api",
+            "v1",
+            "UploadDocumentMultipart"
+          ],
+          "query": [
+            {
+              "key": "SessionID",
+              "value": "{{tokenHogo}}"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl 'https://www.hogodoc.com/HoGo/api/v1/UploadDocumentMultipart?SessionID=d69e8a7e293140f392dd423cb038d184' \\\r\n  -H 'Accept: */*' \\\r\n  -H 'Accept-Language: en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryraelmh2kZNa9QZnM' \\\r\n  -b 'SpryMedia_DataTables_tablepaging_mydocumentlist=%7B%22iCreate%22%3A1774680334395%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B4%2C%22desc%22%2C1%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; SpryMedia_DataTables_tablepaging_history=%7B%22iCreate%22%3A1774680411027%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B0%2C%22asc%22%2C0%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; JSESSIONID=509150927D85639F3A88604CBDE4F4E2; isRefresh=true; l_p=mydocumentlist.html; _ga_WTB0VKWJKM=GS2.1.s1774086181$o23$g0$t1774086181$j60$l0$h0; _ga=GA1.2.542996358.1704605418; _ga_21X02YQCNR=GS2.2.s1774086182$o24$g0$t1774086182$j60$l0$h0; _ga_QJNG5NHYGT=GS2.2.s1774086182$o23$g0$t1774086182$j60$l0$h0; G_ENABLED_IDPS=google; exp_last_visit=1774086184; AWSELB=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; AWSELBCORS=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; exp_last_activity=1774680098; exp_tracker=a%3A1%3A%7Bi%3A0%3Bs%3A5%3A%22index%22%3B%7D; hogo_lang=en; _gid=GA1.2.698432248.1774680109; i18next=en; _sessionToken=d69e8a7e293140f392dd423cb038d184' \\\r\n  -H 'Origin: https://www.hogodoc.com' \\\r\n  -H 'Referer: https://www.hogodoc.com/HoGo/SendWizard' \\\r\n  -H 'Sec-Fetch-Dest: empty' \\\r\n  -H 'Sec-Fetch-Mode: cors' \\\r\n  -H 'Sec-Fetch-Site: same-origin' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \\\r\n  -H 'sec-ch-ua: \"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Google Chrome\";v=\"146\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  --data-raw $'------WebKitFormBoundaryraelmh2kZNa9QZnM\\r\\nContent-Disposition: form-data; name=\"name\"\\r\\n\\r\\np1jkpj5diq1jb29ur1pgn14j41kbv4.pdf\\r\\n------WebKitFormBoundaryraelmh2kZNa9QZnM\\r\\nContent-Disposition: form-data; name=\"SessionID\"\\r\\n\\r\\nd69e8a7e293140f392dd423cb038d184\\r\\n------WebKitFormBoundaryraelmh2kZNa9QZnM\\r\\nContent-Disposition: form-data; name=\"file_name\"\\r\\n\\r\\nBook3.pdf\\r\\n------WebKitFormBoundaryraelmh2kZNa9QZnM\\r\\nContent-Disposition: form-data; name=\"file\"; filename=\"Book3.pdf\"\\r\\nContent-Type: application/pdf\\r\\n\\r\\n\\r\\n------WebKitFormBoundaryraelmh2kZNa9QZnM--\\r\\n'"
+      },
+      "response": []
+    },
+    {
+      "name": "StartEncoding",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if(pm.iterationData.get(\"status\")==\"OK\")\r",
+              "{\r",
+              "    pm.test(\"Status code is 200\", function () {\r",
+              "        pm.response.to.have.status(200);\r",
+              "    });\r",
+              "}\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json, text/plain, */*"
+          },
+          {
+            "key": "Accept-Language",
+            "value": "en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7"
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded;charset=UTF-8"
+          },
+          {
+            "key": "Origin",
+            "value": "https://www.hogodoc.com"
+          },
+          {
+            "key": "Referer",
+            "value": "https://www.hogodoc.com/HoGo/SendWizard"
+          },
+          {
+            "key": "Sec-Fetch-Dest",
+            "value": "empty"
+          },
+          {
+            "key": "Sec-Fetch-Mode",
+            "value": "cors"
+          },
+          {
+            "key": "Sec-Fetch-Site",
+            "value": "same-origin"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Google Chrome\";v=\"146\""
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"Windows\""
+          },
+          {
+            "key": "Cookie",
+            "value": "SpryMedia_DataTables_tablepaging_mydocumentlist=%7B%22iCreate%22%3A1774680334395%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B4%2C%22desc%22%2C1%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; SpryMedia_DataTables_tablepaging_history=%7B%22iCreate%22%3A1774680411027%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B0%2C%22asc%22%2C0%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; JSESSIONID=509150927D85639F3A88604CBDE4F4E2; isRefresh=true; l_p=mydocumentlist.html; _ga_WTB0VKWJKM=GS2.1.s1774086181$o23$g0$t1774086181$j60$l0$h0; _ga=GA1.2.542996358.1704605418; _ga_21X02YQCNR=GS2.2.s1774086182$o24$g0$t1774086182$j60$l0$h0; _ga_QJNG5NHYGT=GS2.2.s1774086182$o23$g0$t1774086182$j60$l0$h0; G_ENABLED_IDPS=google; exp_last_visit=1774086184; AWSELB=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; AWSELBCORS=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; exp_last_activity=1774680098; exp_tracker=a%3A1%3A%7Bi%3A0%3Bs%3A5%3A%22index%22%3B%7D; hogo_lang=en; _gid=GA1.2.698432248.1774680109; i18next=en; _sessionToken=d69e8a7e293140f392dd423cb038d184"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "QueueID",
+              "value": "{{queueId}}",
+              "type": "text",
+              "uuid": "f0db6d7b-e21c-4c17-9151-a54bf6b32d7b"
+            },
+            {
+              "key": "TransactionID",
+              "value": "1774680511110",
+              "type": "text",
+              "uuid": "83f59967-7516-4f77-811a-795e0c1cef52"
+            },
+            {
+              "key": "Title",
+              "value": "{{title}}",
+              "type": "text",
+              "uuid": "61a93812-931b-4dcb-8376-285d9b839006"
+            },
+            {
+              "key": "Description",
+              "value": "{{desc}}",
+              "type": "text",
+              "uuid": "f5eef59c-0cd4-4dfd-a831-d71c82dd3834"
+            },
+            {
+              "key": "ViewOnline",
+              "value": "true",
+              "type": "text",
+              "uuid": "7b3735ff-ece5-4adf-8540-0f30678edf8a"
+            },
+            {
+              "key": "SessionID",
+              "value": "{{tokenHogo}}",
+              "type": "text",
+              "uuid": "5ba31910-9398-4a13-adf2-40979b119d78"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://www.hogodoc.com/HoGo/api/v1/StartEncoding",
+          "protocol": "https",
+          "host": [
+            "www",
+            "hogodoc",
+            "com"
+          ],
+          "path": [
+            "HoGo",
+            "api",
+            "v1",
+            "StartEncoding"
+          ]
+        },
+        "description": "Generated from cURL: curl 'https://www.hogodoc.com/HoGo/api/v1/StartEncoding' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Accept-Language: en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Content-Type: application/x-www-form-urlencoded;charset=UTF-8' \\\r\n  -b 'SpryMedia_DataTables_tablepaging_mydocumentlist=%7B%22iCreate%22%3A1774680334395%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B4%2C%22desc%22%2C1%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; SpryMedia_DataTables_tablepaging_history=%7B%22iCreate%22%3A1774680411027%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B0%2C%22asc%22%2C0%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; JSESSIONID=509150927D85639F3A88604CBDE4F4E2; isRefresh=true; l_p=mydocumentlist.html; _ga_WTB0VKWJKM=GS2.1.s1774086181$o23$g0$t1774086181$j60$l0$h0; _ga=GA1.2.542996358.1704605418; _ga_21X02YQCNR=GS2.2.s1774086182$o24$g0$t1774086182$j60$l0$h0; _ga_QJNG5NHYGT=GS2.2.s1774086182$o23$g0$t1774086182$j60$l0$h0; G_ENABLED_IDPS=google; exp_last_visit=1774086184; AWSELB=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; AWSELBCORS=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; exp_last_activity=1774680098; exp_tracker=a%3A1%3A%7Bi%3A0%3Bs%3A5%3A%22index%22%3B%7D; hogo_lang=en; _gid=GA1.2.698432248.1774680109; i18next=en; _sessionToken=d69e8a7e293140f392dd423cb038d184' \\\r\n  -H 'Origin: https://www.hogodoc.com' \\\r\n  -H 'Referer: https://www.hogodoc.com/HoGo/SendWizard' \\\r\n  -H 'Sec-Fetch-Dest: empty' \\\r\n  -H 'Sec-Fetch-Mode: cors' \\\r\n  -H 'Sec-Fetch-Site: same-origin' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \\\r\n  -H 'sec-ch-ua: \"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Google Chrome\";v=\"146\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  --data-raw 'QueueID=11185e18bb144757ab564e68caa77ba5&TransactionID=1774680511450&Title=Book3.pdf&Description=&ViewOnline=true&SessionID=d69e8a7e293140f392dd423cb038d184'"
+      },
+      "response": []
+    },
+    {
+      "name": "CheckEncodeStatus",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if(pm.iterationData.get(\"status\")==\"OK\")\r",
+              "{\r",
+              "    let dataResponse = pm.response.json()\r",
+              "    pm.environment.set(\"docId\", dataResponse.document_id)\r",
+              "}\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "setTimeout(() =>{}, 15000)"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json, text/plain, */*"
+          },
+          {
+            "key": "Accept-Language",
+            "value": "en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7"
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded;charset=UTF-8"
+          },
+          {
+            "key": "Origin",
+            "value": "https://www.hogodoc.com"
+          },
+          {
+            "key": "Referer",
+            "value": "https://www.hogodoc.com/HoGo/SendWizard"
+          },
+          {
+            "key": "Sec-Fetch-Dest",
+            "value": "empty"
+          },
+          {
+            "key": "Sec-Fetch-Mode",
+            "value": "cors"
+          },
+          {
+            "key": "Sec-Fetch-Site",
+            "value": "same-origin"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Google Chrome\";v=\"146\""
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"Windows\""
+          },
+          {
+            "key": "Cookie",
+            "value": "SpryMedia_DataTables_tablepaging_mydocumentlist=%7B%22iCreate%22%3A1774680334395%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B4%2C%22desc%22%2C1%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; SpryMedia_DataTables_tablepaging_history=%7B%22iCreate%22%3A1774680411027%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B0%2C%22asc%22%2C0%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; JSESSIONID=509150927D85639F3A88604CBDE4F4E2; isRefresh=true; l_p=mydocumentlist.html; _ga_WTB0VKWJKM=GS2.1.s1774086181$o23$g0$t1774086181$j60$l0$h0; _ga=GA1.2.542996358.1704605418; _ga_21X02YQCNR=GS2.2.s1774086182$o24$g0$t1774086182$j60$l0$h0; _ga_QJNG5NHYGT=GS2.2.s1774086182$o23$g0$t1774086182$j60$l0$h0; G_ENABLED_IDPS=google; exp_last_visit=1774086184; AWSELB=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; AWSELBCORS=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; exp_last_activity=1774680098; exp_tracker=a%3A1%3A%7Bi%3A0%3Bs%3A5%3A%22index%22%3B%7D; hogo_lang=en; _gid=GA1.2.698432248.1774680109; i18next=en; _sessionToken=d69e8a7e293140f392dd423cb038d184"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "QueueID",
+              "value": "{{queueId}}",
+              "type": "text",
+              "uuid": "95d8a72e-aedb-4d87-8e4b-cb38dcf70007"
+            },
+            {
+              "key": "SessionID",
+              "value": "{{tokenHogo}}",
+              "type": "text",
+              "uuid": "fe90807a-96bb-4d45-9c30-63a85f7f0cad"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://www.hogodoc.com/HoGo/api/v1/CheckEncodeStatus",
+          "protocol": "https",
+          "host": [
+            "www",
+            "hogodoc",
+            "com"
+          ],
+          "path": [
+            "HoGo",
+            "api",
+            "v1",
+            "CheckEncodeStatus"
+          ]
+        },
+        "description": "Generated from cURL: curl 'https://www.hogodoc.com/HoGo/api/v1/CheckEncodeStatus' \\\r\n  -H 'Accept: application/json, text/plain, */*' \\\r\n  -H 'Accept-Language: en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Content-Type: application/x-www-form-urlencoded;charset=UTF-8' \\\r\n  -b 'SpryMedia_DataTables_tablepaging_mydocumentlist=%7B%22iCreate%22%3A1774680334395%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B4%2C%22desc%22%2C1%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; SpryMedia_DataTables_tablepaging_history=%7B%22iCreate%22%3A1774680411027%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B0%2C%22asc%22%2C0%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; JSESSIONID=509150927D85639F3A88604CBDE4F4E2; isRefresh=true; l_p=mydocumentlist.html; _ga_WTB0VKWJKM=GS2.1.s1774086181$o23$g0$t1774086181$j60$l0$h0; _ga=GA1.2.542996358.1704605418; _ga_21X02YQCNR=GS2.2.s1774086182$o24$g0$t1774086182$j60$l0$h0; _ga_QJNG5NHYGT=GS2.2.s1774086182$o23$g0$t1774086182$j60$l0$h0; G_ENABLED_IDPS=google; exp_last_visit=1774086184; AWSELB=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; AWSELBCORS=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; exp_last_activity=1774680098; exp_tracker=a%3A1%3A%7Bi%3A0%3Bs%3A5%3A%22index%22%3B%7D; hogo_lang=en; _gid=GA1.2.698432248.1774680109; i18next=en; _sessionToken=d69e8a7e293140f392dd423cb038d184' \\\r\n  -H 'Origin: https://www.hogodoc.com' \\\r\n  -H 'Referer: https://www.hogodoc.com/HoGo/SendWizard' \\\r\n  -H 'Sec-Fetch-Dest: empty' \\\r\n  -H 'Sec-Fetch-Mode: cors' \\\r\n  -H 'Sec-Fetch-Site: same-origin' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \\\r\n  -H 'sec-ch-ua: \"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Google Chrome\";v=\"146\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  --data-raw 'QueueID=11185e18bb144757ab564e68caa77ba5&SessionID=d69e8a7e293140f392dd423cb038d184'"
+      },
+      "response": []
+    },
+    {
+      "name": "Get document detail",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let dataResponse =pm.response.json()\r",
+              "if(pm.iterationData.get(\"status\")==\"OK\")\r",
+              "{\r",
+              "    let docId = pm.environment.get(\"docId\")\r",
+              "    let fileName = dataResponse.detail[docId].file_name\r",
+              "\r",
+              "    pm.test(pm.iterationData.get(\"Test Objective\"), function () {\r",
+              "        pm.expect(pm.response.code).eql(200)\r",
+              "    });\r",
+              "\r",
+              "    pm.test(\"Verify file name is \"+ pm.iterationData.get(\"fileName\") , function () {\r",
+              "        pm.expect(fileName).eql(pm.iterationData.get(\"fileName\"))\r",
+              "    });\r",
+              "    //todo \r",
+              "\r",
+              "}\r",
+              "else\r",
+              "{\r",
+              "    pm.test.skip(pm.iterationData.get(\"Test Objective\"), function()\r",
+              "    {\r",
+              "    })\r",
+              "}\r",
+              "\r",
+              "\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://www.hogodoc.com/HoGo/api/v1/GetDocumentDetail?DocumentID={{docId}}&SessionID={{tokenHogo}}",
+          "protocol": "https",
+          "host": [
+            "www",
+            "hogodoc",
+            "com"
+          ],
+          "path": [
+            "HoGo",
+            "api",
+            "v1",
+            "GetDocumentDetail"
+          ],
+          "query": [
+            {
+              "key": "DocumentID",
+              "value": "{{docId}}"
+            },
+            {
+              "key": "SessionID",
+              "value": "{{tokenHogo}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DeleteDocument",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if(pm.iterationData.get(\"status\")==\"OK\")\r",
+              "{\r",
+              "    pm.test(\"Status code is 200\", function () {\r",
+              "        pm.response.to.have.status(200);\r",
+              "    });\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json, text/javascript, */*; q=0.01"
+          },
+          {
+            "key": "Accept-Language",
+            "value": "en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7"
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          {
+            "key": "Origin",
+            "value": "https://www.hogodoc.com"
+          },
+          {
+            "key": "Referer",
+            "value": "https://www.hogodoc.com/HoGo/MyDocumentList"
+          },
+          {
+            "key": "Sec-Fetch-Dest",
+            "value": "empty"
+          },
+          {
+            "key": "Sec-Fetch-Mode",
+            "value": "cors"
+          },
+          {
+            "key": "Sec-Fetch-Site",
+            "value": "same-origin"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "X-Requested-With",
+            "value": "XMLHttpRequest"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Google Chrome\";v=\"146\""
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"Windows\""
+          },
+          {
+            "key": "Cookie",
+            "value": "SpryMedia_DataTables_tablepaging_history=%7B%22iCreate%22%3A1774680411027%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B0%2C%22asc%22%2C0%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; SpryMedia_DataTables_tablepaging_mydocumentlist=%7B%22iCreate%22%3A1774683500333%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B4%2C%22desc%22%2C1%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; JSESSIONID=509150927D85639F3A88604CBDE4F4E2; isRefresh=true; l_p=sendwizard.html; _ga_WTB0VKWJKM=GS2.1.s1774086181$o23$g0$t1774086181$j60$l0$h0; _ga=GA1.2.542996358.1704605418; _ga_21X02YQCNR=GS2.2.s1774086182$o24$g0$t1774086182$j60$l0$h0; _ga_QJNG5NHYGT=GS2.2.s1774086182$o23$g0$t1774086182$j60$l0$h0; G_ENABLED_IDPS=google; exp_last_visit=1774086184; AWSELB=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; AWSELBCORS=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; exp_last_activity=1774680098; exp_tracker=a%3A1%3A%7Bi%3A0%3Bs%3A5%3A%22index%22%3B%7D; hogo_lang=en; _gid=GA1.2.698432248.1774680109; i18next=en; _sessionToken=8a414e43edec4406bde372970e5b7922"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "DocumentID",
+              "value": "{{docId}}",
+              "type": "text",
+              "uuid": "3b8d22f4-a8d4-4056-bc13-f56049f62765"
+            },
+            {
+              "key": "SessionID",
+              "value": "{{tokenHogo}}",
+              "type": "text",
+              "uuid": "cfe92982-35dc-4729-b091-fc01bce188bd"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://www.hogodoc.com/HoGo/api/v1/DeleteDocument",
+          "protocol": "https",
+          "host": [
+            "www",
+            "hogodoc",
+            "com"
+          ],
+          "path": [
+            "HoGo",
+            "api",
+            "v1",
+            "DeleteDocument"
+          ]
+        },
+        "description": "Generated from cURL: curl 'https://www.hogodoc.com/HoGo/api/v1/DeleteDocument' \\\r\n  -H 'Accept: application/json, text/javascript, */*; q=0.01' \\\r\n  -H 'Accept-Language: en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \\\r\n  -b 'SpryMedia_DataTables_tablepaging_history=%7B%22iCreate%22%3A1774680411027%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B0%2C%22asc%22%2C0%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; SpryMedia_DataTables_tablepaging_mydocumentlist=%7B%22iCreate%22%3A1774683500333%2C%22iStart%22%3A0%2C%22iEnd%22%3A0%2C%22iLength%22%3A10%2C%22aaSorting%22%3A%5B%5B4%2C%22desc%22%2C1%5D%5D%2C%22oSearch%22%3A%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%22aoSearchCols%22%3A%5B%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%2C%7B%22bCaseInsensitive%22%3Atrue%2C%22sSearch%22%3A%22%22%2C%22bRegex%22%3Afalse%2C%22bSmart%22%3Atrue%7D%5D%2C%22abVisCols%22%3A%5Btrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%2Ctrue%5D%7D; JSESSIONID=509150927D85639F3A88604CBDE4F4E2; isRefresh=true; l_p=sendwizard.html; _ga_WTB0VKWJKM=GS2.1.s1774086181$o23$g0$t1774086181$j60$l0$h0; _ga=GA1.2.542996358.1704605418; _ga_21X02YQCNR=GS2.2.s1774086182$o24$g0$t1774086182$j60$l0$h0; _ga_QJNG5NHYGT=GS2.2.s1774086182$o23$g0$t1774086182$j60$l0$h0; G_ENABLED_IDPS=google; exp_last_visit=1774086184; AWSELB=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; AWSELBCORS=6921F1930CB9309F687D827A47DC786A454D998C48E52783A4667FFEF206F959A157059C6444249E525831B16544130D2993134BF1576A937ECFAB6D5D1C75CCC942E1AC45; exp_last_activity=1774680098; exp_tracker=a%3A1%3A%7Bi%3A0%3Bs%3A5%3A%22index%22%3B%7D; hogo_lang=en; _gid=GA1.2.698432248.1774680109; i18next=en; _sessionToken=8a414e43edec4406bde372970e5b7922' \\\r\n  -H 'Origin: https://www.hogodoc.com' \\\r\n  -H 'Referer: https://www.hogodoc.com/HoGo/MyDocumentList' \\\r\n  -H 'Sec-Fetch-Dest: empty' \\\r\n  -H 'Sec-Fetch-Mode: cors' \\\r\n  -H 'Sec-Fetch-Site: same-origin' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \\\r\n  -H 'X-Requested-With: XMLHttpRequest' \\\r\n  -H 'sec-ch-ua: \"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Google Chrome\";v=\"146\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  --data-raw 'DocumentID=37c70aa9e6714598ad96b4e6d9f2ece8&SessionID=8a414e43edec4406bde372970e5b7922'"
+      },
+      "response": []
+    }
+  ]
+}
